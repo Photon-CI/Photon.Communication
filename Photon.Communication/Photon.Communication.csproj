@@ -2,6 +2,18 @@
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <LangVersion>7.1</LangVersion>
+    <Version>0.0.1</Version>
+    <Authors>null511</Authors>
+    <Company>Photon CI</Company>
+    <Product>Photon Communication library</Product>
+    <Description>The BSON messaging library developed for Photon based on the Newtonsoft BSON serializer.</Description>
+    <Copyright>Copyright 2018 Joshua Miller</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Photon-CI/Photon.Communication</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Photon-CI/Photon.Communication</RepositoryUrl>
+    <PackageTags>photon ci bson message messaging library TCP</PackageTags>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <FileVersion>0.0.1</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
