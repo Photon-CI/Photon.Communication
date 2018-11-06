@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photon.Communication", "Photon.Communication\Photon.Communication.csproj", "{E80CAC2B-C909-4E09-9C2C-340A6E69863F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photon.Communication.Tests", "Photon.Communication.Tests\Photon.Communication.Tests.csproj", "{087CE9C0-ECE4-4ECB-B6F0-D8F5ABA7309E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E80CAC2B-C909-4E09-9C2C-340A6E69863F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80CAC2B-C909-4E09-9C2C-340A6E69863F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80CAC2B-C909-4E09-9C2C-340A6E69863F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80CAC2B-C909-4E09-9C2C-340A6E69863F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087CE9C0-ECE4-4ECB-B6F0-D8F5ABA7309E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087CE9C0-ECE4-4ECB-B6F0-D8F5ABA7309E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087CE9C0-ECE4-4ECB-B6F0-D8F5ABA7309E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087CE9C0-ECE4-4ECB-B6F0-D8F5ABA7309E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DF6DD63-7B87-4F67-BD0B-D33E62E50210}
+	EndGlobalSection
+EndGlobal
