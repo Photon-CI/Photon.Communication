@@ -19,14 +19,14 @@ namespace Photon.Communication.Tests.Internal.TRx
             queue = new BufferBlock<byte[]>();
         }
 
-        public void Flush(CancellationToken cancellationToken = default(CancellationToken))
+        public void Flush(CancellationToken cancellationToken = default)
         {
             //
         }
 
-        public Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task FlushAsync(CancellationToken cancellationToken = default)
         {
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
        
         public void Write(byte[] buffer, int offset, int count)
@@ -56,7 +56,7 @@ namespace Photon.Communication.Tests.Internal.TRx
             return ReadCurrent(buffer, offset, count);
         }
 
-        public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)
         {
             if (currentItem == null) {
                 try {

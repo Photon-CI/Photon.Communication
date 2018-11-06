@@ -180,10 +180,10 @@ namespace Photon.Communication.Packets
             return buffer;
         }
 
-        protected virtual Task OnMessageReceived(IMessage message)
+        protected virtual async Task OnMessageReceived(IMessage message)
         {
             MessageReceived?.Invoke(this, new MessageReceivedEventArgs(message));
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }

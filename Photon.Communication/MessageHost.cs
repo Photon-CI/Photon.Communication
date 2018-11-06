@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Photon.Communication.Messages;
+using System;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Photon.Communication.Messages;
 
 namespace Photon.Communication
 {
     /// <summary>
-    /// An incomming TCP message connection.
+    /// An incoming TCP message connection.
     /// </summary>
     public class MessageHost
     {
-        public event UnhandledExceptionEventHandler ThreadException;
+        public event EventHandler<UnhandledExceptionEventArgs> ThreadException;
         public event EventHandler Stopped;
 
         public MessageTransceiver Transceiver {get;}
@@ -41,10 +41,10 @@ namespace Photon.Communication
         public void Dispose()
         {
             Transceiver?.Dispose();
-            Tcp?.Dispose();
+            Tcp?.Close();
         }
 
-        public void Stop(CancellationToken token = default(CancellationToken))
+        public void Stop(CancellationToken token = default)
         {
             if (!isConnected) return;
             isConnected = false;
@@ -90,14 +90,15 @@ namespace Photon.Communication
             Stopped?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnThreadException(object exceptionObject)
+        protected virtual void OnThreadException(Exception exception)
         {
-            ThreadException?.Invoke(this, new UnhandledExceptionEventArgs(exceptionObject, false));
+            var e = new UnhandledExceptionEventArgs(exception);
+            ThreadException?.Invoke(this, e);
         }
 
         private void Transceiver_OnThreadException(object sender, UnhandledExceptionEventArgs e)
         {
-            OnThreadException(e.ExceptionObject);
+            OnThreadException(e.Exception);
         }
     }
 }

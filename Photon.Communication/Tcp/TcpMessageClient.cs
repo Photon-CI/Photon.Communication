@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Photon.Communication.Messages;
+using System;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Photon.Communication.Messages;
 
 namespace Photon.Communication.Tcp
 {
@@ -12,7 +12,7 @@ namespace Photon.Communication.Tcp
     /// </summary>
     public class TcpMessageClient : IDisposable
     {
-        public event UnhandledExceptionEventHandler ThreadException;
+        public event EventHandler<UnhandledExceptionEventArgs> ThreadException;
 
         public TcpClient Tcp {get;}
         public MessageTransceiver Transceiver {get;}
@@ -41,7 +41,7 @@ namespace Photon.Communication.Tcp
         public void Dispose()
         {
             Transceiver?.Dispose();
-            Tcp?.Dispose();
+            Tcp?.Close();
         }
 
         public async Task ConnectAsync(string hostname, int port, CancellationToken token)
@@ -97,14 +97,14 @@ namespace Photon.Communication.Tcp
             Transceiver.SendOneWay(message);
         }
 
-        protected virtual void OnThreadException(object exceptionObject)
+        protected virtual void OnThreadException(Exception exception)
         {
-            ThreadException?.Invoke(this, new UnhandledExceptionEventArgs(exceptionObject, false));
+            ThreadException?.Invoke(this, new UnhandledExceptionEventArgs(exception));
         }
 
         private void Transceiver_OnThreadException(object sender, UnhandledExceptionEventArgs e)
         {
-            OnThreadException(e.ExceptionObject);
+            OnThreadException(e.Exception);
         }
     }
 }

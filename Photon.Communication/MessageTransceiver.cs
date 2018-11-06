@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Photon.Communication.Messages;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Photon.Communication.Messages;
 
 namespace Photon.Communication
 {
     public class MessageTransceiver : IDisposable
     {
-        public event UnhandledExceptionEventHandler ThreadException;
+        public event EventHandler<UnhandledExceptionEventArgs> ThreadException;
 
         private readonly object startStopLock;
         private readonly ConcurrentDictionary<string, MessageTask> messageHandles;
@@ -118,9 +118,10 @@ namespace Photon.Communication
             return handle;
         }
 
-        protected virtual void OnThreadException(object exceptionObject)
+        protected virtual void OnThreadException(Exception exception)
         {
-            ThreadException?.Invoke(this, new UnhandledExceptionEventArgs(exceptionObject, false));
+            var e = new UnhandledExceptionEventArgs(exception);
+            ThreadException?.Invoke(this, e);
         }
 
         private void MessageReceiver_MessageReceived(object sender, MessageReceivedEventArgs e)
@@ -159,7 +160,7 @@ namespace Photon.Communication
                         _responseMessage.RequestMessageId = requestMessage.MessageId;
                         messageSender.Send(_responseMessage);
                     }
-                }, TaskContinuationOptions.RunContinuationsAsynchronously);
+                }); // TaskContinuationOptions.RunContinuationsAsynchronously
             }
             else {
                 var messageType = e.Message.GetType();

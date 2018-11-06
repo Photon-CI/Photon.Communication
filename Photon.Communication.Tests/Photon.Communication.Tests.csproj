@@ -1,25 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-
+    <TargetFrameworks>net45;netcoreapp2.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="TCP\**" />
     <EmbeddedResource Remove="TCP\**" />
     <None Remove="TCP\**" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Photon.Communication\Photon.Communication.csproj" />
   </ItemGroup>
-
 </Project>

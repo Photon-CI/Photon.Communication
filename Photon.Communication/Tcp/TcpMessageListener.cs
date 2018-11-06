@@ -15,7 +15,7 @@ namespace Photon.Communication.Tcp
     public class TcpMessageListener : IDisposable
     {
         public event EventHandler<TcpConnectionReceivedEventArgs> ConnectionReceived;
-        public event UnhandledExceptionEventHandler ThreadException;
+        public event EventHandler<UnhandledExceptionEventArgs> ThreadException;
 
         private readonly MessageProcessorRegistry messageRegistry;
         private readonly List<MessageHost> hostList;
@@ -73,7 +73,7 @@ namespace Photon.Communication.Tcp
             listener.BeginAcceptTcpClient(Listener_OnConnectionReceived, new object());
         }
 
-        public void Stop(CancellationToken token = default(CancellationToken))
+        public void Stop(CancellationToken token = default)
         {
             lock (startStopLock) {
                 if (!isListening) return;
@@ -128,7 +128,7 @@ namespace Photon.Communication.Tcp
 
         private void Host_OnThreadException(object sender, UnhandledExceptionEventArgs e)
         {
-            OnThreadException(e.ExceptionObject);
+            OnThreadException(e.Exception);
         }
 
         private void Host_Stopped(object sender, EventArgs e)
@@ -156,9 +156,10 @@ namespace Photon.Communication.Tcp
             }
         }
 
-        protected virtual void OnThreadException(object exceptionObject)
+        protected virtual void OnThreadException(Exception exception)
         {
-            ThreadException?.Invoke(this, new UnhandledExceptionEventArgs(exceptionObject, false));
+            var e = new UnhandledExceptionEventArgs(exception);
+            ThreadException?.Invoke(this, e);
         }
     }
 

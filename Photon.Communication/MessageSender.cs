@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Photon.Communication.Messages;
+using Photon.Communication.Packets;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Photon.Communication.Messages;
-using Photon.Communication.Packets;
 
 namespace Photon.Communication
 {
     internal class MessageSender : IDisposable
     {
-        public event ThreadExceptionEventHandler ThreadError;
+        public event EventHandler<ThreadExceptionEventArgs> ThreadError;
 
         private readonly object startStopLock;
         private PacketSender packetSender;
